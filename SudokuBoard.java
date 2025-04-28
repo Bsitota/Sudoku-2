@@ -58,6 +58,18 @@ public class SudokuBoard {
        }
        return true;
     
+    }
+    private boolean checkingColumnDuplicates(){
+      for(int c = 0; c < baord.length; c++){
+      Set<Charcter> culNum = new HashSet<>();
+        for(int r = 0; r < board[c].length; r++){
+          char d = board[r][c];
+           if(d != '.' && !culNum.add(d)){
+             return false;
+           }
+        }
+      }
+      return true;
     } 
 
     
