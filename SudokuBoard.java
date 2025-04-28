@@ -46,6 +46,19 @@ public class SudokuBoard {
        return true;
     
     }
+    public boolean isRowConatinsNum(){
+       for(int r =0; r < board.length; r++){
+       Set<Character> num = new HashSet<>();
+         for(int c = 0; c < board[r].length; c++){
+         char b = baord[r][c];
+           if(b != '.' && b != num.add(b)){
+             return false;
+           } 
+         }
+       }
+       return true;
+    
+    } 
 
     
     public String toString(){
