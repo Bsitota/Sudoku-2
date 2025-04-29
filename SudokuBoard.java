@@ -71,6 +71,18 @@ public class SudokuBoard {
       }
       return true;
     } 
+    
+    
+    private char[][] miniSquare(int spot){
+       char[][]mini = new char[3][3];
+       for(int r = 0; r < 3; r++){
+         for(int c = 0; c < 3; c++){
+           mini[][] = board[(spot-1)/ 3 * 3 + r][(spot-1)/ 3 * 3 + c];
+         }
+       }
+       return mini;
+    
+    }
 
     
     public String toString(){
