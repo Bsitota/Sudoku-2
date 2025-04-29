@@ -2,6 +2,10 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Set; 
+import java.util.HashSet; 
+import java.util.Map;
+import java.util.HashMap;
 
 public class SudokuBoard {
     private char[][] board;
@@ -26,32 +30,30 @@ public class SudokuBoard {
         }
         
     }
-    public boolean validDataInBoard(){
-       Set<Character> myChars = new HashSet<>();
-       for(char i = '1'; i <= 9; i++){
-         myChars.add(i);
-       
-       }
-       myChars.add(".");
-       for(int r = 0; r < board.length; r++){
-          for(c = 0; c < board[r].length; c++){
-            if(!myChars.contains(board[r][c])){
-              System.err.println("the character not found: " + board[r][c]);
-              return false;
+     private boolean validDataInBoard() {
+        Set<Character> myChars = new HashSet<>();
+        for (char i = '1'; i <= '9'; i++) {
+            myChars.add(i);
+        }
+        myChars.add('.'); 
 
+        for (int r = 0; r < board.length; r++) {
+            for (int c = 0; c < board[r].length; c++) {
+                if(!myChars.contains(board[r][c])) {
+                    System.err.println("Invalid character found: " + board[r][c]);
+                    return false;
+                }
             }
-          }
-          
-       }
-       return true;
-    
+        }
+        return true;
     }
+    
     public boolean checkingRowDuplicates(){
        for(int r =0; r < board.length; r++){
        Set<Character> num = new HashSet<>();
          for(int c = 0; c < board[r].length; c++){
-         char b = baord[r][c];
-           if(b != '.' && b != num.add(b)){
+         char b = board[r][c];
+           if(b != '.' && !num.add(b)){
              return false;
            } 
          }
@@ -60,8 +62,8 @@ public class SudokuBoard {
     
     }
     private boolean checkingColumnDuplicates(){
-      for(int c = 0; c < baord.length; c++){
-      Set<Charcter> culNum = new HashSet<>();
+      for(int c = 0; c < board.length; c++){
+      Set<Character> culNum = new HashSet<>();
         for(int r = 0; r < board[c].length; r++){
           char d = board[r][c];
            if(d != '.' && !culNum.add(d)){
@@ -77,7 +79,7 @@ public class SudokuBoard {
        char[][]mini = new char[3][3];
        for(int r = 0; r < 3; r++){
          for(int c = 0; c < 3; c++){
-           mini[][] = board[(spot - 1)/ 3 * 3 + r][(spot-1)/ 3 * 3 + c];
+           mini[r][c] = board[(spot - 1)/ 3 * 3 + r][(spot-1)/ 3 * 3 + c];
          }
        }
        return mini;
@@ -101,16 +103,18 @@ public class SudokuBoard {
     
     }
     
-    public boolena isValid(){
-       return validDataInBoard() && checkingRowDuplicates() && checkingColumnDuplicates && chakingMiniSquareDuplicates();
+    public boolean isValid(){
+       return validDataInBoard() && checkingRowDuplicates() && checkingColumnDuplicates() && chakingMiniSquareDuplicates();
     }
     
-    public boolean isSolved(){
-       Map<Character, Integer> mapCount = new HashMap<>();
-       for(int a = 1; a <= 9; a++){
-         mapOne.put(a, 0);
-       }
-       for(int r = 0; r < board.length; r++){
+    public boolean isSolved() {
+        Map<Character, Integer> mapCount = new HashMap<>();
+        for (char a = '1'; a <= '9'; a++) {
+            mapCount.put(a, 0);
+        }
+
+        
+        for(int r = 0; r < board.length; r++){
            for(int c = 0; c < board.length; c++){
               char f = board[r][c];
               if(f != '.' && mapCount.containsKey(f)){
@@ -119,15 +123,17 @@ public class SudokuBoard {
               }
            }
         }
+
+        
         for (char a = '1'; a <= '9'; a++) {
             if (mapCount.get(a) != 9) {
-               return false;      
-            }        
+                return false;
+            }
         }
+
+        
         return isValid();
-    
-    }
-    
+    }    
 
     
     public String toString(){
