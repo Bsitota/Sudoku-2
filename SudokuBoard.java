@@ -105,6 +105,29 @@ public class SudokuBoard {
        return validDataInBoard() && checkingRowDuplicates() && checkingColumnDuplicates && chakingMiniSquareDuplicates();
     }
     
+    public boolean isSolved(){
+       Map<Character, Integer> mapCount = new HashMap<>();
+       for(int a = 1; a <= 9; a++){
+         mapOne.put(a, 0);
+       }
+       for(int r = 0; r < board.length; r++){
+           for(int c = 0; c < board.length; c++){
+              char f = board[r][c];
+              if(f != '.' && mapCount.containsKey(f)){
+                    mapCount.put(f, mapCount.get(f) + 1);  
+                
+              }
+           }
+        }
+        for (char a = '1'; a <= '9'; a++) {
+            if (mapCount.get(a) != 9) {
+               return false;      
+            }        
+        }
+        return isValid();
+    
+    }
+    
 
     
     public String toString(){
