@@ -46,7 +46,7 @@ public class SudokuBoard {
        return true;
     
     }
-    public boolean isRowConatinsNum(){
+    public boolean checkingRowDuplicates(){
        for(int r =0; r < board.length; r++){
        Set<Character> num = new HashSet<>();
          for(int c = 0; c < board[r].length; c++){
@@ -77,7 +77,7 @@ public class SudokuBoard {
        char[][]mini = new char[3][3];
        for(int r = 0; r < 3; r++){
          for(int c = 0; c < 3; c++){
-           mini[][] = board[(spot-1)/ 3 * 3 + r][(spot-1)/ 3 * 3 + c];
+           mini[][] = board[(spot - 1)/ 3 * 3 + r][(spot-1)/ 3 * 3 + c];
          }
        }
        return mini;
@@ -99,6 +99,10 @@ public class SudokuBoard {
        }
        return true;
     
+    }
+    
+    public boolena isValid(){
+       return validDataInBoard() && checkingRowDuplicates() && checkingColumnDuplicates && chakingMiniSquareDuplicates();
     }
     
 
