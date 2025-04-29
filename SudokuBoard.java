@@ -83,6 +83,24 @@ public class SudokuBoard {
        return mini;
     
     }
+    
+    private boolean chakingMiniSquareDuplicates(){
+       for(int i = 1; i <=9; i++){
+          Set<Character> miniChar = new HashSet<>();
+          char[][]miniSquare = miniSquare(i);
+          for(int r = 0; r < miniSquare.length; r++){
+              for(int c = 0; c < miniSquare[r].length; c++){
+                 char E = miniSquare[r][c];
+                 if(E != '.' && !miniChar.add(E)){
+                    return false;
+                 }
+             }
+          } 
+       }
+       return true;
+    
+    }
+    
 
     
     public String toString(){
